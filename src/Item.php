@@ -1,0 +1,33 @@
+<?php
+
+
+namespace GildedRose;
+
+
+abstract class Item
+{
+    protected $quality;
+    protected $sellIn;
+    protected $itemName;
+
+
+    public function simulateDay(){
+        $this->sellIn--;
+        //changeQuality()
+        $this->limitQuality();
+    }
+
+    public function displayItem(){
+        echo $this->itemName."\n";
+        echo 'Qualitätswert: '.$this->quality."\n";
+        echo 'Zu verkaufen in '.$this->sellIn.' Tagen.';
+    }
+
+    private function limitQuality(){
+        if($this->quality>50){
+            $this->quality=50;
+        }elseif($this->quality<0){
+            $this->quality=0;
+        }
+    }
+}
