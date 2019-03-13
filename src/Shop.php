@@ -2,6 +2,8 @@
 
 namespace GildedRose;
 
+use GildedRose\Item;
+
 
 class Shop
 {
@@ -16,5 +18,24 @@ class Shop
     {
         $this->items[] = $newItem;
     }
+
+    public function updateAllItems()
+    {
+        foreach ($this->items as $item) {
+            $item->updateItemValuesDefault();
+            $item->updateItemValuesUnique();
+        }
+    }
+
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    public function setItems($items)
+    {
+        $this->items = $items;
+    }
+
 
 }

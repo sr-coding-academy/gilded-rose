@@ -5,10 +5,11 @@ namespace GildedRose;
 
 abstract class Item
 {
-    private $quality;
-    private $purchaseDate;
-    private $expirationDate;
-    private $sellIn;
+    protected $quality;
+    protected $purchaseDate;
+    protected $expirationDate;
+    protected $currentSellIn;
+    protected $originalSellIn;
 
     public function __construct($quality, $purchaseDate, $expirationDate)
     {
@@ -16,24 +17,71 @@ abstract class Item
         // TODO: resolve date problem
         $this->expirationDate = $expirationDate;
         $this->purchaseDate = $expirationDate;
-        $this->sellIn = $expirationDate - $purchaseDate;
+        $this->currentSellIn = $expirationDate - $purchaseDate;
+        $this->originalSellIn = $this->currentSellIn;
     }
 
+    public function getQuality()
+    {
+        return $this->quality;
+    }
+
+    public function setQuality($quality)
+    {
+        $this->quality = $quality;
+    }
+
+    public function getCurrentSellIn()
+    {
+        return $this->currentSellIn;
+    }
+
+    public function setCurrentSellIn($currentSellIn)
+    {
+        $this->currentSellIn = $currentSellIn;
+    }
+
+    protected function changeByDay(){
+
+    }
 
     protected function lowerQualityValue()
     {
         $this->quality--;
     }
 
-    protected function lowerSellInValue()
+    public function lowerSellInValue()
     {
-        $this->sellIn--;
+        $this->currentSellIn--;
     }
+
+     public function updateItemValuesDefault() {
+        $this->lowerQualityValue();
+        $this->lowerSellInValue();
+    }
+
+    public function oneDayPasses() {
+        if ($this->currentSellIn <= 0 && $this->quality < 50 && $this->quality > 0)
+        {
+            $this->updateItemValuesDefault();
+            $this->updateItemValuesUnique();
+        }
+    }
+    abstract function updateItemValuesUnique();
+
+
+
 }
+
+
 
 /*
 $rawToday = getdate();
 $today = "{rawToday['year']}-{rawToday['month']}-{rawToday['day']}";
 $date = new DateTime($today);
 echo $date->format('Y-m-d');
+
+$timestamp  = time();
+echo $timestamp;
+echo date("Y-m-d H:i:s", $timestamp);
 */

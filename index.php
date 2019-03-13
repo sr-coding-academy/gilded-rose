@@ -1,9 +1,18 @@
 <?php
 
 require "vendor/autoload.php";
+use GildedRose\Item\AgedBrie;
+use GildedRose\Shop;
+use GildedRose\Display;
 
-$newShop = new Shop();
+$gildedRose = new Shop();
+$firstItem = new AgedBrie(1,3,15);
+$gildedRose->addItem($firstItem);
 
-$newItem = new Item();
+$testDisplay = new Display();
+$testDisplay->displayShop($gildedRose);
 
-$newShop->addItem($newItem);
+
+
+
+
