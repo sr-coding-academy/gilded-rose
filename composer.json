@@ -1,0 +1,12 @@
+{
+    "name": "sr-coding-academy/gilded-rose",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "GildedRose\\": "src/"
+        }
+    }
+}
