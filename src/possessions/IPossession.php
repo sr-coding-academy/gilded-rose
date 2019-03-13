@@ -11,5 +11,5 @@ namespace GildedRose\possessions;
 
 interface IPossession
 {
-
+    public function getPossessions();
 }

@@ -14,6 +14,7 @@ class Food extends Items
 
     public function dailyUpdate()
     {
-        $this->setQuality( 1);
+        $this->setQuality( $this->getQuality() + 1);
+        $this->setExpiryDate($this->getExpiryDate() - 1);
     }
 }

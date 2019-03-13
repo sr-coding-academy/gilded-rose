@@ -11,10 +11,13 @@ namespace GildedRose\possessions\invetory;
 
 class Weapon extends Items
 {
-
-    protected function dailyUpdate()
+    public function setExpiryDate($expiryDate)
     {
-        // TODO: Implement dailyUpdate() method.
-        $this->setExpiryDate($this->getExpiryDate() + 1);
+        $this->expiryDate = "-";
+    }
+
+    public function dailyUpdate()
+    {
+        $this->setExpiryDate("-");
     }
 }

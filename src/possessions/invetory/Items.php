@@ -20,34 +20,42 @@ abstract class Items
         $this->quality = $quality;
         $this->expiryDate = $expiryDate;
         $this->itemName = $itemName;
+        echo "Creating item: " . $itemName . ", which expires in: " . $expiryDate . " days, with quality: " . $quality . ".\n";
     }
 
-    public function getQuality()
+    protected function getQuality()
     {
-
         return $this->quality;
     }
 
-    public function setQuality($qualityOffset)
+    protected function setQuality($quality)
     {
-        $this->quality += $qualityOffset;
-        if($this->quality < 0){
+        if($this->quality <= 0){
             $this->quality = 0;
         }
-        elseif ($this->quality > 50){
+        else if ($this->quality > 50){
             $this->quality = 50;
+        }else{
+            $this->quality = $quality;
         }
     }
 
-    public function getExpiryDate()
+    protected function getExpiryDate()
     {
         return $this->expiryDate;
     }
 
-    public function setExpiryDate($expiryDate)
+    protected function setExpiryDate($expiryDate)
     {
-        // TODO try catch, product expiry date cant be set in the past
-        $this->expiryDate = $expiryDate;
+        if($this->getExpiryDate() <= 0) {
+            $this->expiryDate = 0;
+        } else {
+            $this->expiryDate = $expiryDate;
+        }
+    }
+    public function getItemDescription()
+    {
+        echo "Satus --> " . $this->itemName . ", expires in: " . $this->expiryDate . " days, with quality: " . $this->quality . ".\n";
     }
 
     protected abstract function dailyUpdate();
