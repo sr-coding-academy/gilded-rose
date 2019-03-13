@@ -2,7 +2,6 @@
 
 namespace GildedRose;
 
-
 abstract class Item
 {
     protected $quality;

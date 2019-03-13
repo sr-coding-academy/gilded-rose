@@ -1,0 +1,6 @@
+define Rules of AgedBrie
+define Rules of Sulfuras
+define Rules of Backstagepasses
+fix the date methods for everything
+
+Refactor
