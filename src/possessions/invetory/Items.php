@@ -28,16 +28,14 @@ abstract class Items
         return $this->quality;
     }
 
-    public function setQuality($quality)
+    public function setQuality($qualityOffset)
     {
+        $this->quality += $qualityOffset;
         if($this->quality < 0){
             $this->quality = 0;
         }
         elseif ($this->quality > 50){
             $this->quality = 50;
-        }
-        else {
-            $this->quality = $quality;
         }
     }
 
