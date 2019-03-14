@@ -13,7 +13,7 @@ abstract class Item
 
     public function simulateDay()
     {
-        $this->sellIn--;
+        $this->changeSellIn();
         $this->changeQuality();
         $this->limitQuality();
     }
@@ -34,5 +34,9 @@ abstract class Item
         } elseif ($this->quality < 0) {
             $this->quality = 0;
         }
+    }
+
+    protected function changeSellIn(){
+        $this->sellIn--;
     }
 }
