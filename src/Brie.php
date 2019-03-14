@@ -16,7 +16,7 @@ class Brie extends Item
         $this->sellIn = $sellIn;
         $this->quality = $quality;
         $this->name = "Brie";
-        $this->price=4.99;
+        $this->price = 4.99;
         $this->generateSellPrice();
     }
 

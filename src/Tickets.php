@@ -16,7 +16,8 @@ class Tickets extends Item
         $this->sellIn = $sellIn;
         $this->quality = $quality;
         $this->name = "Backstage Pass";
-        $this->price=49.99;
+        $this->price = 49.99;
+        $this->generateSellPrice();
     }
 
     protected function changeQuality()
@@ -29,6 +30,14 @@ class Tickets extends Item
             $this->quality += 2;
         } else {
             $this->quality++;
+        }
+    }
+    protected function generateSellPrice()
+    {
+        if($this->sellIn<=0){
+            $this->sellPrice=0.00;
+        }else{
+            $this->sellPrice = ($this->price * 2) / 100 * (100 + ($this->quality * 2));
         }
     }
 }

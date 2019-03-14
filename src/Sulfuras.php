@@ -16,16 +16,17 @@ class Sulfuras extends Item
         $this->sellIn = $sellIn;
         $this->quality = $quality;
         $this->name = "Sulfuras";
-        $this->price=24.99;
+        $this->price = 24.99;
+        $this->generateSellPrice();
     }
 
     protected function changeQuality()
     {
-        $this->quality=$this->quality;
+        $this->quality = $this->quality;
     }
 
     protected function changeSellIn()
     {
-        $this->sellIn=$this->sellIn;
+        $this->sellIn = $this->sellIn;
     }
 }

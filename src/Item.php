@@ -32,11 +32,13 @@ abstract class Item
         }
     }
 
-    protected function changeSellIn(){
+    protected function changeSellIn()
+    {
         $this->sellIn--;
     }
 
-    protected function generateSellPrice(){
-        $this->sellPrice=($this->price*2)/100*(100+($this->quality*2));
+    protected function generateSellPrice()
+    {
+        $this->sellPrice = ($this->price * 2) / 100 * (100 + ($this->quality * 2));
     }
 }

@@ -12,28 +12,30 @@ namespace GildedRose;
 class Shop
 {
     private $stock;
-    private $money;
+    private $bankBalance;
 
     public function __construct()
     {
-        $this->money=0.00;
+        $this->bankBalance = 0.00;
     }
 
-    public function buyItem(Item $item){
+    public function buyItem(Item $item)
+    {
         $this->stock[] = $item;
-        $this->money-=$item->price;
+        $this->bankBalance -= $item->price;
     }
 
     public function sellItem(Item $item)
     {
-        $this->money+=$item->sellPrice;
-        $key=array_search($item, $this->stock);
+        $this->bankBalance += $item->sellPrice;
+        $key = array_search($item, $this->stock);
         unset($this->stock[$key]);
     }
 
-    public function displayStock(){
-        foreach($this->stock as $item){
-            echo $item->name."\n";
+    public function displayStock()
+    {
+        foreach ($this->stock as $item) {
+            echo $item->name . "\n";
             echo 'Qualitätswert: ' . $item->quality . "\n";
             echo 'Zu verkaufen in ' . $item->sellIn . " Tagen.\n";
         }
@@ -41,12 +43,13 @@ class Shop
 
     public function simulateDay()
     {
-        foreach($this->stock as $item){
+        foreach ($this->stock as $item) {
             $item->updateItem();
         }
     }
 
-    public function showMoney(){
-        echo "Aktueller Kontostand: ".$this->money."\n";
+    public function showMoney()
+    {
+        echo "Aktueller Kontostand: " . $this->bankBalance . "\n";
     }
 }
