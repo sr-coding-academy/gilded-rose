@@ -23,7 +23,7 @@ abstract class Items
         echo "Creating item: " . $itemName . ", which expires in: " . $expiryDate . " days, with quality: " . $quality . ".\n";
     }
 
-    protected function getQuality()
+    public function getQuality()
     {
         return $this->quality;
     }
@@ -38,6 +38,7 @@ abstract class Items
         }else{
             $this->quality = $quality;
         }
+
     }
 
     protected function getExpiryDate()
@@ -49,6 +50,7 @@ abstract class Items
     {
         if($this->getExpiryDate() <= 0) {
             $this->expiryDate = 0;
+            $this->setQuality($this->getQuality() - 2);
         } else {
             $this->expiryDate = $expiryDate;
         }

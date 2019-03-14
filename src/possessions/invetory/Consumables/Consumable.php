@@ -6,15 +6,15 @@
  * Time: 14:41
  */
 
-namespace GildedRose\possessions\invetory;
+namespace GildedRose\possessions\invetory\Consumables;
+use GildedRose\possessions\invetory\Items;
 
-
-class Food extends Items
+abstract class Consumable extends Items
 {
 
     public function dailyUpdate()
     {
-        $this->setQuality( $this->getQuality() + 1);
+        $this->setQuality( $this->getQuality() - 1);
         $this->setExpiryDate($this->getExpiryDate() - 1);
     }
 }

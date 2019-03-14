@@ -8,7 +8,6 @@
 
 namespace GildedRose;
 
-
 use GildedRose\possessions\Inventory;
 
 class Inn

@@ -6,12 +6,11 @@
  * Time: 14:42
  */
 
-namespace GildedRose\possessions\invetory;
-
+namespace GildedRose\possessions\invetory\Ticket;
+use GildedRose\possessions\invetory\Items;
 
 class Ticket extends Items
 {
-
     public function dailyUpdate()
     {
         $this->setExpiryDate($this->getExpiryDate() - 1);
