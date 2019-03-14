@@ -18,5 +18,7 @@ class Brie extends Item
         $this->itemName="Brie";
     }
 
-
+    protected function changeQuality(){
+        $this->quality++;
+    }
 }

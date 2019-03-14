@@ -17,6 +17,8 @@ abstract class Item
         $this->limitQuality();
     }
 
+    abstract protected function changeQuality();
+
     public function displayItem(){
         echo $this->itemName."\n";
         echo 'Qualitätswert: '.$this->quality."\n";
