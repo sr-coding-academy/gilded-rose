@@ -9,7 +9,6 @@ abstract class Item
     protected $purchaseDate;
     protected $expirationDate;
     protected $currentSellIn;
-    protected $originalSellIn;
 
     public function __construct($quality, $expirationDate)
     {
@@ -18,7 +17,6 @@ abstract class Item
         $this->expirationDate = strtotime($expirationDate);
         $this->purchaseDate = time();
         $this->currentSellIn = $this->calculateCurrentSellIn($this->purchaseDate, $this->expirationDate);
-        $this->originalSellIn = $this->currentSellIn;
     }
 
     public function getQuality()
