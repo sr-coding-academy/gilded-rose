@@ -6,19 +6,20 @@ abstract class Item
 {
     public $name;
     protected $quality;
+    protected $qualityOnExpirationDate;
     protected $purchaseDate;
     protected $expirationDate;
     protected $currentSellIn;
     protected $originalSellIn;
 
-    public function __construct($quality, $purchaseDate, $expirationDate)
+    public function __construct($quality, $expirationDate)
     {
         $this->name = "Default";
         $this->quality = $quality;
         // TODO: resolve date problem
-        $this->expirationDate = $expirationDate;
-        $this->purchaseDate = $expirationDate;
-        $this->currentSellIn = $expirationDate - $purchaseDate;
+        $this->expirationDate = strtotime($expirationDate);
+        $this->purchaseDate = time();
+        $this->currentSellIn = abs(round(($this->purchaseDate - $this->expirationDate) / (60 * 60 * 24)));
         $this->originalSellIn = $this->currentSellIn;
     }
 
@@ -62,6 +63,7 @@ abstract class Item
     {
         $this->currentSellIn--;
         $this->quality = $this->quality - (2 ** abs($this->currentSellIn));
+        $this->quality = $this->qualityCheck($this->quality);
     }
 
     abstract function updateItemValuesUnique();
@@ -70,13 +72,37 @@ abstract class Item
     {
         if ($this->quality > 0 && $this->quality <= 50) {
             if ($this->currentSellIn >= 0) {
+//                echo "{$this->currentSellIn}: s1 \n";
+//                echo "{$this->quality}: q1 \n";
                 $this->updateItemValuesBeforeSellIn();
                 $this->updateItemValuesUnique();
+//                echo "{$this->currentSellIn}: s2 \n";
+//                echo "{$this->quality}: q2 \n";
             } else {
+//                echo "{$this->currentSellIn}: s3 \n";
+//                echo "{$this->quality}: q4 \n";
                 $this->updateItemValuesAfterSellIn();
                 $this->updateItemValuesUnique();
+//                echo "{$this->currentSellIn}: s5 \n";
+//                echo "{$this->quality}: q5 \n";
             }
+        } else {
+            $this->updateItemValuesAfterSellIn();
         }
+        $this->quality = $this->qualityCheck($this->quality);
+    }
+
+    protected function qualityCheck($anyQuality)
+    {
+        if ($anyQuality < 0) {
+            $anyQuality = 0;
+        }
+
+        if ($anyQuality > 50) {
+            $anyQuality = 50;
+        }
+
+        return $anyQuality;
     }
 }
 

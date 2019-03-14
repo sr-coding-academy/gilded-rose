@@ -5,9 +5,9 @@ use GildedRose\Item;
 
 class BackstagePasses extends Item
 {
-    public function __construct($quality, $purchaseDate, $expirationDate)
+    public function __construct($quality, $expirationDate)
     {
-        parent::__construct($quality, $purchaseDate, $expirationDate);
+        parent::__construct($quality, $expirationDate);
         $this->name = "Backstage passes";
     }
 

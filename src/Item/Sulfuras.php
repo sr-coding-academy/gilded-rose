@@ -7,15 +7,15 @@ class Sulfuras extends Item
 {
     private static $sulfurasQuality;
 
-    public function __construct($quality, $purchaseDate, $expirationDate)
+    public function __construct($quality, $expirationDate)
     {
+        parent::__construct($quality, $expirationDate);
         $this->name = "Sulfuras";
-        parent::__construct($quality, $purchaseDate, $expirationDate);
-        Sulfuras::$sulfurasQuality = $quality;
+        self::$sulfurasQuality = $quality;
     }
 
     function updateItemValuesUnique()
     {
-
+        $this->quality = self::$sulfurasQuality;
     }
 }
