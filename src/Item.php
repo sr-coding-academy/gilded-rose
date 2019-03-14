@@ -4,6 +4,7 @@ namespace GildedRose;
 
 abstract class Item
 {
+    public $name;
     protected $quality;
     protected $purchaseDate;
     protected $expirationDate;
@@ -12,6 +13,7 @@ abstract class Item
 
     public function __construct($quality, $purchaseDate, $expirationDate)
     {
+        $this->name = "Default";
         $this->quality = $quality;
         // TODO: resolve date problem
         $this->expirationDate = $expirationDate;
@@ -38,6 +40,16 @@ abstract class Item
     public function setCurrentSellIn($currentSellIn)
     {
         $this->currentSellIn = $currentSellIn;
+    }
+
+    public function getPurchaseDate()
+    {
+        return $this->purchaseDate;
+    }
+
+    public function getExpirationDate()
+    {
+        return $this->expirationDate;
     }
 
     private function updateItemValuesBeforeSellIn()

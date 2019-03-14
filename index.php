@@ -11,6 +11,7 @@ $gildedRose->addItem($firstItem);
 
 $testDisplay = new Display();
 $testDisplay->displayShop($gildedRose);
+$testDisplay->displayShopItemsAfter(30);
 
 
 

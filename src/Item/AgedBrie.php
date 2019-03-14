@@ -9,6 +9,7 @@ class AgedBrie extends Item
     private $qualityCounter;
     public function __construct($quality, $purchaseDate, $expirationDate)
     {
+        $this->name = "Aged Brie";
         parent::__construct($quality, $purchaseDate, $expirationDate);
         $this->qualityCounter = 0;
     }

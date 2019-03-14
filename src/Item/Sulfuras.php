@@ -9,6 +9,7 @@ class Sulfuras extends Item
 
     public function __construct($quality, $purchaseDate, $expirationDate)
     {
+        $this->name = "Sulfuras";
         parent::__construct($quality, $purchaseDate, $expirationDate);
         Sulfuras::$sulfurasQuality = $quality;
     }

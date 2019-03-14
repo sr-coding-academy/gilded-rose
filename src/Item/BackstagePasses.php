@@ -5,6 +5,12 @@ use GildedRose\Item;
 
 class BackstagePasses extends Item
 {
+    public function __construct($quality, $purchaseDate, $expirationDate)
+    {
+        parent::__construct($quality, $purchaseDate, $expirationDate);
+        $this->name = "Backstage passes";
+    }
+
     function updateItemValuesUnique()
     {
         // TODO: Implement updateItemValuesUnique() method.
