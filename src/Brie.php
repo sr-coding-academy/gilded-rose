@@ -15,7 +15,7 @@ class Brie extends Item
     {
         $this->sellIn = $sellIn;
         $this->quality = $quality;
-        $this->itemName = "Brie";
+        $this->name = "Brie";
     }
 
     protected function changeQuality()

@@ -15,7 +15,7 @@ class Sulfuras extends Item
     {
         $this->sellIn = $sellIn;
         $this->quality = $quality;
-        $this->itemName = "Sulfuras";
+        $this->name = "Sulfuras";
     }
 
     protected function changeQuality()

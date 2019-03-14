@@ -2,10 +2,13 @@
 
 require "vendor/autoload.php";
 
+use GildedRose\Shop;
 use GildedRose\Brie;
 use GildedRose\Tickets;
 use GildedRose\Sulfuras;
 
-$brie = new  Brie(0);
-$brie->simulateDay();
-$brie->displayItem();
+$shop=new Shop();
+$shop->buyItem(new Brie(20));
+$shop->buyItem(new Tickets(30));
+$shop->buyItem(new Sulfuras(25));
+$shop->displayStock();

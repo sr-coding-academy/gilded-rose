@@ -6,12 +6,12 @@ namespace GildedRose;
 
 abstract class Item
 {
-    protected $quality;
-    protected $sellIn;
-    protected $itemName;
+    public $quality;
+    public $sellIn;
+    public $name;
 
 
-    public function simulateDay()
+    public function updateItem()
     {
         $this->changeSellIn();
         $this->changeQuality();
@@ -19,13 +19,6 @@ abstract class Item
     }
 
     abstract protected function changeQuality();
-
-    public function displayItem()
-    {
-        echo $this->itemName . "\n";
-        echo 'Qualitätswert: ' . $this->quality . "\n";
-        echo 'Zu verkaufen in ' . $this->sellIn . ' Tagen.';
-    }
 
     private function limitQuality()
     {
