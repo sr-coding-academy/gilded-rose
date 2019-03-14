@@ -16,6 +16,7 @@ class Tickets extends Item
         $this->sellIn = $sellIn;
         $this->quality = $quality;
         $this->name = "Backstage Pass";
+        $this->price=49.99;
     }
 
     protected function changeQuality()

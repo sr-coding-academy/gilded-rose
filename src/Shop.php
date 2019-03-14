@@ -11,14 +11,22 @@ namespace GildedRose;
 
 class Shop
 {
-    public $stock;
+    private $stock;
+    private $money;
+
+    public function __construct()
+    {
+        $this->money=0.00;
+    }
 
     public function buyItem(Item $item){
         $this->stock[] = $item;
+        $this->money-=$item->price;
     }
 
     public function sellItem(Item $item)
     {
+        $this->money+=$item->sellPrice;
         $key=array_search($item, $this->stock);
         unset($this->stock[$key]);
     }
@@ -36,5 +44,9 @@ class Shop
         foreach($this->stock as $item){
             $item->updateItem();
         }
+    }
+
+    public function showMoney(){
+        echo "Aktueller Kontostand: ".$this->money."\n";
     }
 }
