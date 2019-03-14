@@ -26,9 +26,10 @@ class Inn
         $this->name = $name;
         echo "Creating INN: " . $name;
         $this->loadInventory();
-        echo " \n\n";
         $this->customerList = [];
         $this->ledge = new Ledge();
+        $this->displayInnFinances();
+        echo " \n\n";
     }
 
     private function loadInventory()
@@ -44,26 +45,62 @@ class Inn
             $item->dailyUpdate();
             $item->getItemDescription();
         }
+        echo "\n";
     }
 
     public function addCustomer($customer)
     {
         $this->customerList[] = $customer;
+        echo "Customer " .$customer->getName() . " just walked in." . "\n";
+        $customer->displayFinances();
     }
 
     public function transaction($itemPosition,$customer)
     {
-        $key = array_search($customer, $this->customerList);
-        $customer = $this->customerList[$key];
-        $customer->buyItem($this->listOfItems[$itemPosition]->getName());
-        $this->myInvetory->sellItem($itemPosition);
-        $this->displayFinances();
+        //find and load customer
+        $customerID = array_search($customer, $this->customerList);
+        $customer = $this->customerList[$customerID];
+        $this->purchaseItem($customer, $itemPosition);
+
     }
 
-    private function displayFinances(){
+    private function displayInnFinances(){
         $this->myCurrencies = $this->ledge->getPossessions();
-        echo "Displaying Inn finances: \n";
-        echo "Gold: " . $this->myCurrencies[0]->getAmount() ."\n";
+        echo "Displaying Inn finances:   ";
+        echo "Gold: " . $this->myCurrencies[0]->getAmount() ."  |  ";
         echo "Silver: " . $this->myCurrencies[1]->getAmount()."\n";
+    }
+
+    private function purchaseItem($customer, $itemPosition){
+        $customerBudget = $customer->getBudget();
+        echo "Customer " . $customer->getName() . " wants to buy item " . $this->listOfItems[$itemPosition]->getName() ."!\n";
+        if($customerBudget[0] * 5 + $customerBudget[1] >= $this->listOfItems[$itemPosition]->getQuality()){
+            $itemValue = $this->listOfItems[$itemPosition]->getQuality();
+            if($itemValue <= $customerBudget[0]){
+                $goldCoins = floor($itemValue, 5);
+                $silverCoins = $goldCoins % 5;
+
+                $customer->setBudget([$customerBudget[0] - $goldCoins, $customerBudget[1] + $silverCoins]);
+                $this->myCurrencies[0]->setAmount($this->myCurrencies[0]->getAmount() + $goldCoins);
+                $this->myCurrencies[1]->setAmount($this->myCurrencies[1]->getAmount() - $silverCoins);
+            }
+            else{
+                $goldCoinsValue = $customerBudget[0] * 5;
+                $silverCoins = $itemValue - $goldCoinsValue;
+
+                $customer->setBudget([0, $customerBudget[1] - $silverCoins]);
+                $this->myCurrencies[0]->setAmount($this->myCurrencies[0]->getAmount() + $customerBudget[0]);
+                $this->myCurrencies[1]->setAmount($this->myCurrencies[1]->getAmount() + $silverCoins);
+            }
+            echo "Customer " . $customer->getName() . " successfully purchased item " . $this->listOfItems[$itemPosition]->getName() . "\n";
+            $customer->getItemInInventory($this->listOfItems[$itemPosition]->getName());
+            $this->myInvetory->sellItem($itemPosition);
+
+            $customer->displayFinances();
+            $this->displayInnFinances();
+        }
+        else{
+            echo "Not enough finances! Get out of my Inn you fucking hobo! \n";
+        }
     }
 }

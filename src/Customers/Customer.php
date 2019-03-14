@@ -32,9 +32,13 @@ class Customer
         $this->budget = $newBudget;
     }
 
-    public function buyItem($newItem)
+    public function getItemInInventory($newItem)
     {
         $this->inventory[] = $newItem;
+    }
+
+    public function getName(){
+        return $this->name;
     }
 
     public function showInventory()
@@ -43,6 +47,12 @@ class Customer
         foreach ($this->inventory as $item) {
             echo $item . "\n";
         }
+    }
+    public function displayFinances()
+    {
+        echo "Displaying " . $this->name . " finances:   ";
+        echo "Gold: " . $this->getBudget()[0] . "  |  ";
+        echo "Silver: " . $this->getBudget()[1]. "\n";
     }
 
 }
