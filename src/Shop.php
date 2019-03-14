@@ -2,7 +2,7 @@
 
 namespace GildedRose;
 
-class Shop
+class Shop implements IShop
 {
     private $inventory;
 
