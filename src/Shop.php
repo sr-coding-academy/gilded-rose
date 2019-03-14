@@ -24,4 +24,11 @@ class Shop
             echo 'Zu verkaufen in ' . $item->sellIn . " Tagen.\n";
         }
     }
+
+    public function simulateDay()
+    {
+        foreach($this->stock as $item){
+            $item->updateItem();
+        }
+    }
 }
