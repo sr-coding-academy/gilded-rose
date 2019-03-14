@@ -9,7 +9,12 @@
 namespace GildedRose\possessions\invetory\Armory;
 
 
-class Sulfuras
-{
+use GildedRose\possessions\invetory\Items;
 
+class Sulfuras extends Weapon
+{
+    public function dailyUpdate()
+    {
+
+    }
 }

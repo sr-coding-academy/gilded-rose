@@ -9,7 +9,7 @@
 namespace GildedRose\possessions\invetory\Armory;
 
 
-class Longsword
+class Longsword extends Weapon
 {
-
+    //simply implement weapon no new functionality
 }

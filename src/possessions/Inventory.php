@@ -8,9 +8,13 @@
 
 namespace GildedRose\possessions;
 
+use GildedRose\possessions\invetory\Armory\Longsword;
+use GildedRose\possessions\invetory\Armory\Sulfuras;
 use GildedRose\possessions\invetory\Consumables\AgedBrie;
 use GildedRose\possessions\invetory\Consumables\ElkMeat;
 use GildedRose\possessions\invetory\Consumables\RedWine;
+use GildedRose\possessions\invetory\Tickets\BackstagePass;
+use GildedRose\possessions\invetory\Tickets\Membership;
 
 class Inventory implements IPossession
 {
@@ -18,17 +22,19 @@ class Inventory implements IPossession
 
     public function __construct()
     {
-        $this->addItem(AgedBrie::class,10, 3, "Aged Brie");
-        $this->myPossessions[] = new RedWine(10, 1000, "Red Wine");
-        $this->myPossessions[] = new ElkMeat(5, 7, "Elk Meat");
-        //$this->myPossessions[] = new Weapon(50, 1, "Sulfuras");
-        //$this->myPossessions[] = new Ticket(20, 3, "Backstage Passes");
+        $this->addItem(AgedBrie::class,23, 10, "Aged Brie");
+        $this->addItem(RedWine::class,20, 1000, "Red Wine");
+        $this->addItem(ElkMeat::class,10, 7, "Elk Meat");
+        $this->addItem(Sulfuras::class,50, "-", "Sulfuras");
+        $this->addItem(Longsword::class,10, 12, "Long Sword");
+        $this->addItem(BackstagePass::class,15, 8, "Backstage Pass");
+        $this->addItem(Membership::class,35, 30, "Membership");
     }
 
     public function cleanInventory()
     {
         foreach($this->myPossessions as $item){
-            if($item->getQuality() == 0){
+            if($item->getQuality() === 0){
                 $key = array_search($item, $this->myPossessions);
                 unset($this->myPossessions[$key]);
                 $this->myPossessions = array_values($this->myPossessions);

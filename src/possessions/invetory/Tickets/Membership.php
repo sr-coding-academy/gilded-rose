@@ -8,8 +8,14 @@
 
 namespace GildedRose\possessions\invetory\Tickets;
 
-
-class Membership
+class Membership extends Ticket
 {
+    public function dailyUpdate()
+    {
+        $this->setExpiryDate($this->getExpiryDate() - 1);
 
+        if ($this->getExpiryDate() == 0) {
+            $this->setQuality(0);
+        }
+    }
 }
