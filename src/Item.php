@@ -11,25 +11,28 @@ abstract class Item
     protected $itemName;
 
 
-    public function simulateDay(){
+    public function simulateDay()
+    {
         $this->sellIn--;
-        //changeQuality()
+        $this->changeQuality();
         $this->limitQuality();
     }
 
     abstract protected function changeQuality();
 
-    public function displayItem(){
-        echo $this->itemName."\n";
-        echo 'Qualitätswert: '.$this->quality."\n";
-        echo 'Zu verkaufen in '.$this->sellIn.' Tagen.';
+    public function displayItem()
+    {
+        echo $this->itemName . "\n";
+        echo 'Qualitätswert: ' . $this->quality . "\n";
+        echo 'Zu verkaufen in ' . $this->sellIn . ' Tagen.';
     }
 
-    private function limitQuality(){
-        if($this->quality>50){
-            $this->quality=50;
-        }elseif($this->quality<0){
-            $this->quality=0;
+    private function limitQuality()
+    {
+        if ($this->quality > 50) {
+            $this->quality = 50;
+        } elseif ($this->quality < 0) {
+            $this->quality = 0;
         }
     }
 }

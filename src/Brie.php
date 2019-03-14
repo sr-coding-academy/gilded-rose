@@ -11,14 +11,15 @@ namespace GildedRose;
 
 class Brie extends Item
 {
-    public function __construct($sellIn, $quality=25)
+    public function __construct($sellIn, $quality = 25)
     {
-        $this->sellIn=$sellIn;
-        $this->quality=$quality;
-        $this->itemName="Brie";
+        $this->sellIn = $sellIn;
+        $this->quality = $quality;
+        $this->itemName = "Brie";
     }
 
-    protected function changeQuality(){
+    protected function changeQuality()
+    {
         $this->quality++;
     }
 }
