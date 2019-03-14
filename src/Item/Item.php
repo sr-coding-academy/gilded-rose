@@ -1,12 +1,11 @@
 <?php
 
-namespace GildedRose;
+namespace GildedRose\Item;
 
 abstract class Item
 {
     public $name;
     protected $quality;
-    protected $qualityOnExpirationDate;
     protected $purchaseDate;
     protected $expirationDate;
     protected $currentSellIn;
@@ -18,7 +17,7 @@ abstract class Item
         $this->quality = $quality;
         $this->expirationDate = strtotime($expirationDate);
         $this->purchaseDate = time();
-        $this->currentSellIn = abs(round(($this->purchaseDate - $this->expirationDate) / (60 * 60 * 24)));
+        $this->currentSellIn = $this->calculateCurrentSellIn($this->purchaseDate, $this->expirationDate);
         $this->originalSellIn = $this->currentSellIn;
     }
 
@@ -27,19 +26,9 @@ abstract class Item
         return $this->quality;
     }
 
-    public function setQuality($quality)
-    {
-        $this->quality = $quality;
-    }
-
     public function getCurrentSellIn()
     {
         return $this->currentSellIn;
-    }
-
-    public function setCurrentSellIn($currentSellIn)
-    {
-        $this->currentSellIn = $currentSellIn;
     }
 
     public function getPurchaseDate()
@@ -51,21 +40,6 @@ abstract class Item
     {
         return $this->expirationDate;
     }
-
-    private function updateItemValuesBeforeSellIn()
-    {
-        $this->currentSellIn--;
-        $this->quality--;
-    }
-
-    private function updateItemValuesAfterSellIn()
-    {
-        $this->currentSellIn--;
-        $this->quality = $this->quality - (2 ** abs($this->currentSellIn));
-        $this->quality = $this->qualityCheck($this->quality);
-    }
-
-    abstract function updateItemValuesUnique();
 
     public function oneDayPasses()
     {
@@ -80,32 +54,38 @@ abstract class Item
         } else {
             $this->updateItemValuesAfterSellIn();
         }
-        $this->quality = $this->qualityCheck($this->quality);
+        $this->quality = $this->limitQuality($this->quality);
     }
 
-    protected function qualityCheck($anyQuality)
+    private function calculateCurrentSellIn($purchaseDate, $expirationDate) {
+        return abs(round(($purchaseDate - $expirationDate) / (60 * 60 * 24)));
+    }
+
+    private function limitQuality($quality)
     {
-        if ($anyQuality < 0) {
-            $anyQuality = 0;
+        if ($quality < 0) {
+            $quality = 0;
         }
 
-        if ($anyQuality > 50) {
-            $anyQuality = 50;
+        if ($quality > 50) {
+            $quality = 50;
         }
 
-        return $anyQuality;
+        return $quality;
     }
+
+    private function updateItemValuesBeforeSellIn()
+    {
+        $this->currentSellIn--;
+        $this->quality--;
+    }
+
+    private function updateItemValuesAfterSellIn()
+    {
+        $this->currentSellIn--;
+        $this->quality = $this->quality - (2 ** abs($this->currentSellIn));
+        $this->quality = $this->limitQuality($this->quality);
+    }
+
+    abstract function updateItemValuesUnique();
 }
-
-
-
-/*
-$rawToday = getdate();
-$today = "{rawToday['year']}-{rawToday['month']}-{rawToday['day']}";
-$date = new DateTime($today);
-echo $date->format('Y-m-d');
-
-$timestamp  = time();
-echo $timestamp;
-echo date("Y-m-d H:i:s", $timestamp);
-*/

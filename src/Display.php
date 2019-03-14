@@ -4,11 +4,10 @@ namespace GildedRose;
 
 class Display
 {
-    public function displayShop(Shop $shop)
+    public function displayInventory(Shop $shop)
     {
-        foreach ($shop->getItems() as $item) {
-            echo "---------------------------\n";
-            echo "Name: {$item->name}\n";
+        foreach ($shop->getInventory() as $item) {
+            echo "\n\t{$item->name}\n";
             $tempOne = date("d-m-Y", $item->getPurchaseDate());
             echo "Purchase date: {$tempOne}\n";
             $tempTwo = date("d-m-Y", $item->getExpirationDate());
@@ -21,15 +20,18 @@ class Display
             else {
                 echo "Days until expiration: {$item->getCurrentSellIn()}\n";
             }
+            echo "---------------------------\n";
         }
     }
 
-    public function displayShopItemsAfter(Shop $shop, $days)
+    public function displayInventoryAfter(Shop $shop, $days)
     {
         for ($i = 0; $i < $days-1; $i++) {
-            $shop->updateAllItems();
+            $shop->updateInventory();
         }
-        echo "After {$days} days: \n";
-        $this->displayShop($shop);
+        echo "\n______________________\n";
+        echo "|After {$days} days:  |\n";
+        echo "______________________\n";
+        $this->displayInventory($shop);
     }
 }

@@ -2,11 +2,8 @@
 
 namespace GildedRose\Item;
 
-use GildedRose\Item;
-
 class AgedBrie extends Item
 {
-    private $qualityCounter;
     public function __construct($quality, $expirationDate)
     {
         parent::__construct($quality, $expirationDate);
@@ -20,7 +17,6 @@ class AgedBrie extends Item
         }
         else {
             $this->quality = $this->quality + 2;
-            $this->qualityCounter++;
         }
     }
 }

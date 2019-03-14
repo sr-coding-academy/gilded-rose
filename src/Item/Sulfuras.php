@@ -1,21 +1,20 @@
 <?php
 
 namespace GildedRose\Item;
-use GildedRose\Item;
 
 class Sulfuras extends Item
 {
-    private static $sulfurasQuality;
+    private static $permanent;
 
     public function __construct($quality, $expirationDate)
     {
         parent::__construct($quality, $expirationDate);
         $this->name = "Sulfuras";
-        self::$sulfurasQuality = $quality;
+        self::$permanent = $quality;
     }
 
     function updateItemValuesUnique()
     {
-        $this->quality = self::$sulfurasQuality;
+        $this->quality = self::$permanent;
     }
 }

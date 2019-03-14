@@ -2,39 +2,34 @@
 
 namespace GildedRose;
 
-use GildedRose\Item;
-
-
 class Shop
 {
-    private $items;
+    private $inventory;
 
     public function __construct()
     {
-        $this->items = [];
+        $this->inventory = [];
     }
 
     public function addItem($newItem)
     {
-        $this->items[] = $newItem;
+        $this->inventory[] = $newItem;
     }
 
-    public function updateAllItems()
+    public function updateInventory()
     {
-        foreach ($this->items as $item) {
+        foreach ($this->inventory as $item) {
             $item->oneDayPasses();
         }
     }
 
-    public function getItems()
+    public function getInventory()
     {
-        return $this->items;
+        return $this->inventory;
     }
 
-    public function setItems($items)
+    public function setInventory($inventory)
     {
-        $this->items = $items;
+        $this->inventory = $inventory;
     }
-
-
 }
