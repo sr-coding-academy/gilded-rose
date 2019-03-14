@@ -41,6 +41,11 @@ abstract class Items
 
     }
 
+    public function getName()
+    {
+        return $this->itemName;
+    }
+
     protected function getExpiryDate()
     {
         return $this->expiryDate;

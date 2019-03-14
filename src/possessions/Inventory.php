@@ -42,6 +42,11 @@ class Inventory implements IPossession
         }
     }
 
+    public function sellItem($key){
+        unset($this->myPossessions[$key]);
+        $this->myPossessions = array_values($this->myPossessions);
+    }
+
     public function getPossessions()
     {
         $this->cleanInventory();
