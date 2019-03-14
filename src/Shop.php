@@ -22,8 +22,7 @@ class Shop
     public function updateAllItems()
     {
         foreach ($this->items as $item) {
-            $item->updateItemValuesDefault();
-            $item->updateItemValuesUnique();
+            $item->oneDayPasses();
         }
     }
 

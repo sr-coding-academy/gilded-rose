@@ -40,38 +40,32 @@ abstract class Item
         $this->currentSellIn = $currentSellIn;
     }
 
-
-    public function updateItemValuesBeforeSellIn()
+    private function updateItemValuesBeforeSellIn()
     {
         $this->currentSellIn--;
         $this->quality--;
     }
 
-    public function updateItemValuesAfterSellIn()
+    private function updateItemValuesAfterSellIn()
     {
         $this->currentSellIn--;
         $this->quality = $this->quality - (2 ** abs($this->currentSellIn));
-    }
-
-    public function updateItemValues()
-    {
-
     }
 
     abstract function updateItemValuesUnique();
 
     public function oneDayPasses()
     {
-        if ($this->currentSellIn <= 0 && $this->quality < 50 && $this->quality > 0) {
-            $this->updateItemValuesDefault();
-            $this->updateItemValuesUnique();
+        if ($this->quality > 0 && $this->quality <= 50) {
+            if ($this->currentSellIn >= 0) {
+                $this->updateItemValuesBeforeSellIn();
+                $this->updateItemValuesUnique();
+            } else {
+                $this->updateItemValuesAfterSellIn();
+                $this->updateItemValuesUnique();
+            }
         }
-
     }
-
-
-
-
 }
 
 
