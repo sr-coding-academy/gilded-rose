@@ -13,11 +13,16 @@ class BackstagePasses extends Item
 
     function updateItemValuesUnique()
     {
-        // TODO: Implement updateItemValuesUnique() method.
-        if ($this->currentSellIn <= 10) {
+        if ($this->currentSellIn <= 10 && $this->currentSellIn > 5) {
             $this->quality = $this->quality + 2;
-        } elseif ($this->currentSellIn <= 5) {
+        }
+
+        if ($this->currentSellIn <= 5 && $this->currentSellIn > 0) {
             $this->quality = $this->quality + 3;
+        }
+
+        if ($this->currentSellIn <= 0) {
+            $this->quality = 0;
         }
     }
 }

@@ -1,4 +1,1 @@
-Display Items correctly after several days
-fix the date methods for everything
-
 Refactor
