@@ -17,6 +17,12 @@ class Shop
         $this->stock[] = $item;
     }
 
+    public function sellItem(Item $item)
+    {
+        $key=array_search($item, $this->stock);
+        unset($this->stock[$key]);
+    }
+
     public function displayStock(){
         foreach($this->stock as $item){
             echo $item->name."\n";
