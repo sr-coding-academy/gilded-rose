@@ -41,10 +41,12 @@ class Shop
         }
     }
 
-    public function simulateDay()
+    public function simulateDay($days)
     {
-        foreach ($this->stock as $item) {
-            $item->updateItem();
+        for($i=0; $i<$days; $i++){
+            foreach ($this->stock as $item) {
+                $item->updateItem();
+            }
         }
     }
 
