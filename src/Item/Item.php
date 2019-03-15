@@ -16,7 +16,7 @@ abstract class Item
         $this->quality = $quality;
         $this->expirationDate = strtotime($expirationDate);
         $this->purchaseDate = time();
-        $this->currentSellIn = $this->calculateCurrentSellIn($this->purchaseDate, $this->expirationDate);
+        $this->currentSellIn = $this->initializeCurrentSellIn($this->purchaseDate, $this->expirationDate);
     }
 
     public function getQuality()
@@ -55,7 +55,7 @@ abstract class Item
         $this->quality = $this->limitQuality($this->quality);
     }
 
-    private function calculateCurrentSellIn($purchaseDate, $expirationDate) {
+    private function initializeCurrentSellIn($purchaseDate, $expirationDate) {
         return abs(round(($purchaseDate - $expirationDate) / (60 * 60 * 24)));
     }
 
