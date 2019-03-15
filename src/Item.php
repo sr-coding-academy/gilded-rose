@@ -21,8 +21,6 @@ abstract class Item
         $this->generateSellPrice();
     }
 
-    abstract protected function changeQuality();
-
     private function limitQuality()
     {
         if ($this->quality > 50) {

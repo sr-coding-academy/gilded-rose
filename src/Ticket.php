@@ -9,7 +9,7 @@
 namespace GildedRose;
 
 
-class Tickets extends Item
+class Ticket extends Item
 {
     public function __construct($sellIn, $quality = 25)
     {

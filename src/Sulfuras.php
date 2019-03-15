@@ -20,13 +20,7 @@ class Sulfuras extends Item
         $this->generateSellPrice();
     }
 
-    protected function changeQuality()
-    {
-        $this->quality = $this->quality;
-    }
-
-    protected function changeSellIn()
-    {
-        $this->sellIn = $this->sellIn;
+    public function updateItem(){
+        $this->generateSellPrice();
     }
 }
