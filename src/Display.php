@@ -29,9 +29,9 @@ class Display
         for ($i = 0; $i < $days-1; $i++) {
             $shop->updateInventory();
         }
-        echo "\n______________________\n";
-        echo "|After {$days} days:  |\n";
-        echo "______________________\n";
+        echo "\n\t\t\t\t\t\t\t\t______________________\n";
+        echo "\t\t\t\t\t\t\t\t|\tAfter {$days} days:\t |\n";
+        echo "\t\t\t\t\t\t\t\t______________________\n";
         $this->displayInventory($shop);
     }
 }
