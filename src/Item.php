@@ -6,9 +6,9 @@ namespace GildedRose;
 
 abstract class Item
 {
-    public $quality;
-    public $sellIn;
-    public $name;
+    protected $quality;
+    protected $sellIn;
+    protected $name;
     public $price;
     public $sellPrice;
 
