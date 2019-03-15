@@ -11,6 +11,7 @@ namespace GildedRose\possessions\Finances;
 
 interface ICurrency
 {
-    public function setAmount($newamount);
+    public function __construct($fileName);
+    public function setAmount($newAmount);
     public function getAmount();
 }

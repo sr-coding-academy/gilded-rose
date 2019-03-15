@@ -60,6 +60,7 @@ abstract class Items
             $this->expiryDate = $expiryDate;
         }
     }
+
     public function getItemDescription()
     {
         echo "Satus --> " . $this->itemName . ", expires in: " . $this->expiryDate . " days, with quality: " . $this->quality . ".\n";

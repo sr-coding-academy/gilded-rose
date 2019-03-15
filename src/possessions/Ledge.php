@@ -14,15 +14,14 @@ use GildedRose\possessions\Finances\Silver;
 
 class Ledge implements IPossession
 {
-    private $ledge;
+    private $ledge = [];
     public function getPossessions()
     {
-        $this->ledge = [];
-        $this->ledge[] = new Gold();
-        $this->ledge[] = new Silver();
-
         return $this->ledge;
-
     }
 
+    public function setResources($goldFile, $silverFile){
+        $this->ledge[] = new Gold($goldFile);
+        $this->ledge[] = new Silver($silverFile);
+    }
 }

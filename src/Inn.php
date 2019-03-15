@@ -15,7 +15,7 @@ use GildedRose\possessions\Ledge;
 class Inn
 {
     private $name;
-    private $myInvetory;
+    private $myInventory;
     private $customerList;
     private $listOfItems;
     private $ledge;
@@ -27,20 +27,25 @@ class Inn
         echo "Creating INN: " . $name;
         $this->loadInventory();
         $this->customerList = [];
-        $this->ledge = new Ledge();
+        $this->loadFinances();
         $this->displayInnFinances();
         echo " \n\n";
     }
 
     private function loadInventory()
     {
-        $this->myInvetory = new Inventory();
+        $this->myInventory = new Inventory();
+    }
+
+    private function loadFinances(){
+        $this->ledge = new Ledge();
+        $this->ledge->setResources("inn_gold", "inn_silver");
     }
 
     public function openShop()
     {
         echo "Opening shop for today \n";
-        $this->listOfItems = $this->myInvetory->getPossessions();
+        $this->listOfItems = $this->myInventory->getPossessions();
         foreach ($this->listOfItems as $item) {
             $item->dailyUpdate();
             $item->getItemDescription();
@@ -57,21 +62,6 @@ class Inn
 
     public function transaction($itemPosition,$customer)
     {
-        //find and load customer
-        $customerID = array_search($customer, $this->customerList);
-        $customer = $this->customerList[$customerID];
-        $this->purchaseItem($customer, $itemPosition);
-
-    }
-
-    private function displayInnFinances(){
-        $this->myCurrencies = $this->ledge->getPossessions();
-        echo "Displaying Inn finances:   ";
-        echo "Gold: " . $this->myCurrencies[0]->getAmount() ."  |  ";
-        echo "Silver: " . $this->myCurrencies[1]->getAmount()."\n";
-    }
-
-    private function purchaseItem($customer, $itemPosition){
         $customerBudget = $customer->getBudget();
         echo "Customer " . $customer->getName() . " wants to buy item " . $this->listOfItems[$itemPosition]->getName() ."!\n";
         if($customerBudget[0] * 5 + $customerBudget[1] >= $this->listOfItems[$itemPosition]->getQuality()){
@@ -94,7 +84,7 @@ class Inn
             }
             echo "Customer " . $customer->getName() . " successfully purchased item " . $this->listOfItems[$itemPosition]->getName() . "\n";
             $customer->getItemInInventory($this->listOfItems[$itemPosition]->getName());
-            $this->myInvetory->sellItem($itemPosition);
+            $this->myInventory->sellItem($itemPosition);
 
             $customer->displayFinances();
             $this->displayInnFinances();
@@ -102,5 +92,12 @@ class Inn
         else{
             echo "Not enough finances! Get out of my Inn you fucking hobo! \n";
         }
+    }
+
+    private function displayInnFinances(){
+        $this->myCurrencies = $this->ledge->getPossessions();
+        echo "Displaying Inn finances:   ";
+        echo "Gold: " . $this->myCurrencies[0]->getAmount() ."  |  ";
+        echo "Silver: " . $this->myCurrencies[1]->getAmount()."\n";
     }
 }

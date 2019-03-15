@@ -12,16 +12,23 @@ namespace GildedRose\possessions\Finances;
 class Gold implements ICurrency
 {
 
+    private $filename;
+
+    public function __construct($filename)
+    {
+        $this->filename = $filename;
+    }
+
     public function setAmount($newamount)
     {
-        $fileHandler = fopen('C:\workspace\GildedRose\gilded-rose\resources\gold.txt', 'w');
+        $fileHandler = fopen(__DIR__ . '\resources\\' . $this->filename . '.txt', 'w');
         fwrite($fileHandler, $newamount);
         fclose($fileHandler);
     }
 
     public function getAmount()
     {
-        if ($fileHandler = fopen('C:\workspace\GildedRose\gilded-rose\resources\gold.txt', 'r+')) {
+        if ($fileHandler = fopen( __DIR__ . '\resources\\' . $this->filename . '.txt', 'r+')) {
             while (!feof($fileHandler)) {
                 $amount = fgets($fileHandler);
             }

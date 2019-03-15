@@ -17,5 +17,4 @@ use GildedRose\Customers\Customer;
         sleep(10);
         // Simulate a day in the real world
         $myInn->openShop();
-
     }
