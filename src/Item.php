@@ -13,6 +13,21 @@ abstract class Item
     public $sellPrice;
 
 
+    public function __construct($sellIn, $quality=25)
+    {
+        $this->sellIn = $sellIn;
+        $this->quality = $quality;
+        $this->setName(static::class);
+        $this->setPrice();
+        $this->generateSellPrice();
+    }
+
+    protected function setName($name){
+        $this->name=$name;
+    }
+
+    abstract protected function setPrice();
+
     public function updateItem()
     {
         $this->changeSellIn();

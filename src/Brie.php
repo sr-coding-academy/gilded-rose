@@ -11,13 +11,9 @@ namespace GildedRose;
 
 class Brie extends Item
 {
-    public function __construct($sellIn, $quality = 25)
-    {
-        $this->sellIn = $sellIn;
-        $this->quality = $quality;
-        $this->name = "Brie";
-        $this->price = 4.99;
-        $this->generateSellPrice();
+
+    protected function setPrice(){
+        $this->price=4.99;
     }
 
     protected function changeQuality()

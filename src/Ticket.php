@@ -11,13 +11,9 @@ namespace GildedRose;
 
 class Ticket extends Item
 {
-    public function __construct($sellIn, $quality = 25)
-    {
-        $this->sellIn = $sellIn;
-        $this->quality = $quality;
-        $this->name = "Backstage Pass";
-        $this->price = 49.99;
-        $this->generateSellPrice();
+
+    protected function setPrice(){
+        $this->price=49.99;
     }
 
     protected function changeQuality()

@@ -11,16 +11,12 @@ namespace GildedRose;
 
 class Sulfuras extends Item
 {
-    public function __construct($quality = 25)
-    {
-        $this->sellIn = 1000;
-        $this->quality = $quality;
-        $this->name = "Sulfuras";
-        $this->price = 24.99;
-        $this->generateSellPrice();
+
+    protected function setPrice(){
+        $this->price=24.99;
     }
 
     public function updateItem(){
-        $this->generateSellPrice();
+        //Overwrites existing method, does nothing
     }
 }
