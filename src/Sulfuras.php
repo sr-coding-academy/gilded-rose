@@ -11,9 +11,9 @@ namespace GildedRose;
 
 class Sulfuras extends Item
 {
-    public function __construct($sellIn, $quality = 25)
+    public function __construct($quality = 25)
     {
-        $this->sellIn = $sellIn;
+        $this->sellIn = 1000;
         $this->quality = $quality;
         $this->name = "Sulfuras";
         $this->price = 24.99;
